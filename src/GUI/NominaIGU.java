@@ -8,6 +8,7 @@ package GUI;
 import Controlador.ControladorNomina;
 import entidad.Nomempleado;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -138,6 +139,11 @@ public class NominaIGU extends javax.swing.JFrame {
         });
 
         botonMenor.setText("Menor ");
+        botonMenor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonMenorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -290,88 +296,46 @@ public class NominaIGU extends javax.swing.JFrame {
     }//GEN-LAST:event_botonMostrarActionPerformed
 
     private void botonSumaSueldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSumaSueldoActionPerformed
-        ControladorNomina cn = new ControladorNomina();
-        List<Nomempleado> lista= cn.seleccionarEmpleados();
-        int total=0;
-        for(int i=0;i<lista.size();i++){
-        double salario= lista.get(i).getSalario()-lista.get(i).getSalario()*0.08;
-        lista.get(i).setSalario((int) salario);
-    }
-        
-        for(int i=0;i<lista.size();i++){
-            total+=lista.get(i).getSalario();
-        }
-        JOptionPane.showMessageDialog(rootPane, "total a pagar ="+total);
+        Reportes r = new Reportes();
+        JOptionPane.showMessageDialog(rootPane, "total a pagar ="+r.sumaSueldos());
     }//GEN-LAST:event_botonSumaSueldoActionPerformed
 
     private void botonSueldobrutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSueldobrutoActionPerformed
         String id = campoIdEmpleado.getText();
-        ControladorNomina cn = new ControladorNomina();
-        Nomempleado e= cn.seleccionarEmpleado(id);
-        campoIdEmpleado.setText(e.getId());
-        campoNombreEmpleado.setText(e.getNombre());
-        camposalarioEmpleado.setText(""+e.getSalario());
+        Reportes r = new Reportes();
+        JOptionPane.showMessageDialog(rootPane, "total a pagar ="+r.sueldoBruto(id));
     }//GEN-LAST:event_botonSueldobrutoActionPerformed
 
     private void botonSueldoRealActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSueldoRealActionPerformed
         String id = campoIdEmpleado.getText();
-        ControladorNomina cn = new ControladorNomina();
-        Nomempleado e= cn.seleccionarEmpleado(id);
-        double salario;
-        salario = e.getSalario()-e.getSalario()*0.08;
-        campoIdEmpleado.setText(e.getId());
-        campoNombreEmpleado.setText(e.getNombre());
-        camposalarioEmpleado.setText(""+salario);
+        Reportes r = new Reportes();
+        JOptionPane.showMessageDialog(rootPane, "total a pagar ="+r.sueldoreal(id));
     }//GEN-LAST:event_botonSueldoRealActionPerformed
 
     private void botonSueldoEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSueldoEmpleadosActionPerformed
-        ControladorNomina cn = new ControladorNomina();
-        List<Nomempleado> lista= cn.seleccionarEmpleados();
-        for(int i=0;i<lista.size();i++){
-        double salario= lista.get(i).getSalario()-lista.get(i).getSalario()*0.08;
-        lista.get(i).setSalario((int) salario);
-    }
-        String mensaje="";
-        for(int i=0;i<lista.size();i++){
-            mensaje+=lista.get(i).getId()+" "+lista.get(i).getNombre()+" "+lista.get(i).getSalario()+"\n";
-        }
-        JOptionPane.showMessageDialog(rootPane, mensaje);
+       Reportes r = new Reportes();
+        JOptionPane.showMessageDialog(rootPane, "total a pagar ="+r.sueldosEmpleados());
     }//GEN-LAST:event_botonSueldoEmpleadosActionPerformed
 
     private void botonTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonTotalActionPerformed
-        ControladorNomina cn = new ControladorNomina();
-        List<Nomempleado> lista= cn.seleccionarEmpleados();
-        int total=0;
-        
-        for(int i=0;i<lista.size();i++){
-            total+=lista.get(i).getSalario();
-        }
-        JOptionPane.showMessageDialog(rootPane, "total a pagar ="+total);
+        Reportes r = new Reportes();
+        JOptionPane.showMessageDialog(rootPane, "total a pagar ="+r.total());
     }//GEN-LAST:event_botonTotalActionPerformed
 
     private void botonPromedioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPromedioActionPerformed
-        ControladorNomina cn = new ControladorNomina();
-        List<Nomempleado> lista= cn.seleccionarEmpleados();
-        int total=0;
-        
-        for(int i=0;i<lista.size();i++){
-            total+=lista.get(i).getSalario();
-        }
-        double prom=total/(lista.size());
-        JOptionPane.showMessageDialog(rootPane, "total a pagar ="+prom);
+        Reportes r = new Reportes();
+        JOptionPane.showMessageDialog(rootPane, "total a pagar ="+r.promSueldos());
     }//GEN-LAST:event_botonPromedioActionPerformed
 
     private void botonIdEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIdEmpleadoActionPerformed
-        ControladorNomina cn = new ControladorNomina();
-        List<Nomempleado> lista= cn.seleccionarEmpleados();
-        String mensaje="";
-        
-        for(int i=0;i<lista.size();i++){
-            mensaje+=lista.get(i).getId()+"\n";
-        }
-        
-        JOptionPane.showMessageDialog(rootPane, mensaje);
+        Reportes r = new Reportes();
+        JOptionPane.showMessageDialog(rootPane, "total a pagar ="+r.IDEmpleados());
     }//GEN-LAST:event_botonIdEmpleadoActionPerformed
+
+    private void botonMenorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMenorActionPerformed
+        Reportes r = new Reportes();
+        JOptionPane.showMessageDialog(rootPane, "total a pagar ="+r.menorSueldo());
+    }//GEN-LAST:event_botonMenorActionPerformed
 
     /**
      * @param args the command line arguments
